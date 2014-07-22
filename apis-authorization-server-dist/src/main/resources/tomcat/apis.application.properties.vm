@@ -16,7 +16,7 @@
 
 # The database settings 
 jdbc.driverClassName=com.mysql.jdbc.Driver
-jdbc.url=jdbc\:mysql\://db._OPENCONEXT_DOMAIN_\:3306/apis
+jdbc.url=jdbc\:mysql\://localhost\:3306/apis
 jdbc.username=root
 jdbc.password=c0n3xt
 

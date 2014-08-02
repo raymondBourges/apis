@@ -18,16 +18,8 @@
  */
 package org.surfnet.oaaas.example.api.resource;
 
-import java.security.Principal;
-import java.util.List;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
+import com.yammer.dropwizard.auth.Auth;
+import com.yammer.metrics.annotation.Timed;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -35,8 +27,11 @@ import org.surfnet.oaaas.example.api.domain.Course;
 import org.surfnet.oaaas.example.api.domain.Student;
 import org.surfnet.oaaas.example.api.domain.University;
 
-import com.yammer.dropwizard.auth.Auth;
-import com.yammer.metrics.annotation.Timed;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.security.Principal;
+import java.util.List;
 
 /**
  * Main resource
@@ -101,7 +96,21 @@ public class UniversityResource {
   @Path("/course")
   public Response getAllCourses(@Auth
   Principal principal) {
-    return Response.ok(university.getCourses()).build();
+    return Response.ok(university.getCourses())
+            .header("Access-Control-Allow-Origin", "http://localhost:8888")
+            .header("Access-Control-Allow-Methods", "GET")
+            .header("Access-Control-Allow-Headers", "Authorization")
+            .build();
+  }
+
+  @OPTIONS
+  @Path("/course")
+  public Response rb() {
+      return Response.ok()
+              .header("Access-Control-Allow-Origin", "http://localhost:8888")
+              .header("Access-Control-Allow-Methods", "GET")
+              .header("Access-Control-Allow-Headers", "Authorization")
+              .build();
   }
 
   @GET

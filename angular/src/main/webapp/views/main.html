@@ -2,30 +2,15 @@
     <div id="heading">
         <div id="logo">
 
-            <oauth
-                    site="http://localhost:8080"
-                    authorize-path="/oauth2/authorize"
-                    client-id="test-angular"
-                    redirect-uri="http://localhost:8888/"
-                    profile-uri="http://localhost:8180/v1/api/course"
-                    state="trucMachin"
-                    scope="read">
-            </oauth>
-
-
-            <div class="token" ng-if="accessToken">
-                with access token {{accessToken}}
-            </div>
-
-        </div>
-        <div id="tagline">
-            <p>
-                Demo for <a href="http://andreareginato.github.io/oauth-ng/">oauth-ng</a>, AngularJS directive for OAuth 2.0
-            </p>
-            <p>
-                Click to the sign in link above, login with the demo credentials and authorize<br>
-                the application to get the authorized user and the access token.
-            </p>
+            Token = {{token}}
+            <hr>
+            Retour = {{ret}}
+            <hr>
+            <ul>
+                <li ng-repeat="course in courses">
+                    {{course.id}} : {{course.name}} ({{course.description}})
+                </li>
+            </ul>
         </div>
     </div>
 </section>

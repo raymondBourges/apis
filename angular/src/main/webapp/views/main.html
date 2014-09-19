@@ -5,6 +5,9 @@
             Token = {{token}}
             <hr>
             Retour = {{ret}}
+            <div ng-show="displayNewTokenButton">
+                <button ng-click="getNewToken()">Get new token</button>
+            </div>
             <hr>
             <ul>
                 <li ng-repeat="course in courses">

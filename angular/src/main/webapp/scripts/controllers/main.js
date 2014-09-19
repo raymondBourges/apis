@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app')
-    .controller('MainCtrl', function ($scope, $http) {
+    .controller('MainCtrl', function ($scope, $http, $route) {
 
         jso.getToken(function(token) {
 
@@ -14,7 +14,13 @@ angular.module('app')
                 }).
                 error(function(data, status, headers, config) {
                     $scope.ret = "NOK !"
+                    $scope.displayNewTokenButton = true;
                 });
+
+            $scope.getNewToken = function() {
+                jso.wipeTokens();
+                $route.reload();
+            }
         });
 
 
